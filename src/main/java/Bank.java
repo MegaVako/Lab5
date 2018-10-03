@@ -26,9 +26,15 @@ public class Bank {
      * @return boolean
      */
     public boolean withdrawMoney(final BankAccount bankAccount, final double amount) {
-        /*
-         * Implement this function
-         */
+        if (amount >= 0 && bankAccount != null) {
+            if (bankAccount.takeMoney(amount)) {
+                return true;
+            } else {
+                return false;
+            }
+        } else {
+            return false;
+        }
     }
 
     /**
@@ -42,9 +48,12 @@ public class Bank {
      * @return boolean
      */
     public boolean depositMoney(final BankAccount bankAccount, final double amount) {
-        /*
-         * Implement this function
-         */
+        if (amount >= 0) {
+            bankAccount.depositeMoney(amount);
+            return true;
+        } else {
+            return false;
+        }
     }
 
     /**
@@ -61,9 +70,12 @@ public class Bank {
 
     public boolean transferMoney(final BankAccount source, final BankAccount destination,
             final double amount) {
-        /*
-         * Implement this function
-         */
+        if(source.takeMoney(amount) && amount >= 0 && source != null && destination != null){
+            destination.depositeMoney(amount);
+            return true;
+        } else {
+            return false;
+        }
     }
 
     /**
@@ -74,9 +86,9 @@ public class Bank {
      */
 
     public void changeOwnerName(final BankAccount bankAccount, final String name) {
-        /*
-         * Implement this function
-         */
+        if (bankAccount != null) {
+            bankAccount.setOwnerName(name);
+        }
     }
 
     public static int totalAccounts = 0;
@@ -86,11 +98,11 @@ public class Bank {
      * @return the total number of accounts
      */
     public static int getNumberOfAccount() {
-        /*
-         * Implement this function
-         */
+        return totalAccounts;
     }
-
+    public static void newAccountOpened() {
+        totalAccounts++;
+    }
     /**
      * Main method for testing.
      *

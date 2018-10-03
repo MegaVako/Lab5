@@ -27,12 +27,33 @@ public class BankAccount {
     private double interestEarned;
 
     public BankAccount(final String name, final BankAccountType accountCategory) {
-        /*
-         * Implement this function
-         */
+        this.ownerName = name;
+        accountType = accountCategory;
+        Bank.newAccountOpened();
     }
 
     /*
      * Implement getters and setters as appropriate for private variables.
      */
+
+    public void setOwnerName(String ownerName) {
+        this.ownerName = ownerName;
+    }
+    public boolean takeMoney(final double amount) {
+        if (getAccountBalance() >= amount) {
+            accountBalance -= amount;
+            System.out.println(ownerName + " has " + accountBalance + " in his/her bank rn");
+            return true;
+        } else {
+            System.out.println("Withdraw money failed");
+            return false;
+        }
+    }
+    public void depositeMoney(final double amount) {
+        accountBalance += amount;
+        System.out.println(ownerName + " has " + accountBalance + " in his/her bank rn");
+    }
+    public double getAccountBalance() {
+        return accountBalance;
+    }
 }
